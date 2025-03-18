@@ -1,0 +1,225 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+}
+
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #dbd8d7;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.nav-left .logo img {
+  height: 40px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 10px;
+  color: black;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: darkgray;
+}
+
+/* Right Navigation Icons */
+.nav-right {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-right a {
+  font-size: 18px;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.nav-right a:hover {
+  color: darkgray;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%; /* Adjusted */
+  background-color: #f2f2f2;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px 40px;
+  z-index: 1000;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+/* Dropdown Layout */
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Column Layout */
+.menu-column {
+  flex: 1;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-right: 1px solid #ccc;
+}
+
+/* Remove right border for last column */
+.menu-column:last-child {
+  border-right: none;
+}
+
+/* Image Column */
+.menu-image {
+  flex: 1;
+  text-align: right;
+}
+
+.menu-image img {
+  max-width: 250px;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slides img {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.prev img, .next img {
+  width: 40px;
+  height: auto;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.prev img:hover, .next img:hover {
+  opacity: 1;
+}
+
+/* Carousel Indicators (Dots) */
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-indicators button.active {
+  background-color: white;
+  width: 14px;
+  height: 14px;
+}
+
+.carousel-indicators button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Just Added Section */
+.just-added {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+}
+
+.item {
+  position: relative;
+  width: 200px;
+  overflow: hidden;
+}
+
+.item img {
+  width: 100%;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.item .hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.item:hover .hover {
+  opacity: 1;
+}
+
+.item:hover .default {
+  opacity: 0;
+}
