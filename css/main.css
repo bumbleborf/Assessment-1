@@ -1,16 +1,16 @@
-/* Global Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
 }
 
 body {
-  background-color: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fff;
+  color: #333;
 }
 
-/* Navigation Bar */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -18,10 +18,10 @@ body {
   padding: 15px 40px;
   background-color: #dbd8d7;
   border-bottom: 1px solid #ddd;
-  position: relative;
+  flex-wrap: wrap;
 }
 
-.nav-left .logo img {
+.logo img {
   height: 40px;
 }
 
@@ -44,11 +44,26 @@ body {
   transition: color 0.3s ease-in-out;
 }
 
+.dropdown-toggle {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 10px;
+  color: black;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.dropdown-toggle:hover {
+  color: darkgray;
+}
+
+
 .nav-links a:hover {
   color: darkgray;
 }
 
-/* Right Navigation Icons */
 .nav-right {
   display: flex;
   gap: 20px;
@@ -70,18 +85,17 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 500px; /* Adjust width as needed */
+  width: max-content;
   background-color: #f2f2f2;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 15px 20px;
+  padding: 20px;
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  transition: all 0.3s ease;
 }
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-menu {
   display: block;
   opacity: 1;
@@ -89,47 +103,47 @@ body {
   transform: translateY(0);
 }
 
-/* Dropdown Layout */
 .menu-container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: 400px; /* Adjust max width */
-  width: 100%;
+  gap: 30px;
 }
 
-/* Column Layout */
 .menu-column {
-  flex: 1;
-  padding: 0 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border-right: 1px solid #ccc;
+  min-width: 120px;
 }
 
-/* Remove right border for last column */
-.menu-column:last-child {
-  border-right: none;
+.menu-column a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  transition: color 0.2s ease;
 }
 
-/* Image Column */
+.menu-column a:hover {
+  color: #666;
+}
+
+.link-red {
+  color: red;
+}
+
+.btn-black {
+  background-color: black;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-align: center;
+}
+
 .menu-image img {
-  width: 200px; /* Adjust image size */
-  height: 150px;
-  display: block;
-}
-
-/* .menu-image {
-  flex: 1;
-  text-align: right;
-}
-
-.menu-image img {
-  max-width: 250px;
+  width: 150px;
   height: auto;
-  border-radius: 5px;
-} */
+  object-fit: cover;
+}
 
 /* Carousel */
 .carousel {
@@ -145,11 +159,11 @@ body {
 
 .carousel-slides img {
   width: 100%;
-  height: auto;
   flex-shrink: 0;
 }
 
-.prev, .next {
+.prev,
+.next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -158,24 +172,30 @@ body {
   cursor: pointer;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.prev {
+  left: 10px;
+}
 
-.prev img, .next img {
+.next {
+  right: 10px;
+}
+
+.prev img,
+.next img {
   width: 40px;
-  height: auto;
   opacity: 0.7;
   transition: opacity 0.3s;
 }
 
-.prev img:hover, .next img:hover {
+.prev img:hover,
+.next img:hover {
   opacity: 1;
 }
 
-/* Carousel Indicators (Dots) */
+/* Carousel Indicators */
 .carousel-indicators {
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -189,58 +209,20 @@ body {
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .indicator.active {
   background-color: black;
 }
 
-.carousel-indicators {
-  position: absolute; /* Change from absolute to relative */
-  bottom: 0; /* Remove negative positioning */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  margin-top: 10px; /* Add some spacing below the carousel */
-}
-
-/* .carousel-indicators {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-}
-
-.carousel-indicators button {
-  width: 12px;
-  height: 12px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.carousel-indicators button.active {
-  background-color: white;
-  width: 14px;
-  height: 14px;
-}
-
-.carousel-indicators button:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-} */
-
 /* Just Added Section */
 .just-added {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 20px;
+  padding: 20px 40px;
+  flex-wrap: wrap;
 }
 
 .item {
@@ -251,7 +233,8 @@ body {
 
 .item img {
   width: 100%;
-  transition: opacity 0.3s ease-in-out;
+  display: block;
+  transition: opacity 0.3s ease;
 }
 
 .item .hover {
@@ -269,4 +252,110 @@ body {
   opacity: 0;
 }
 
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .menu-container {
+    flex-direction: column;
+  }
+
+  .just-added {
+    justify-content: center;
+  }
+
+  .menu-column {
+    border: none;
+  }
+
+  .nav-right {
+    margin-top: 10px;
+  }
+}
+
+/* Mobile Nav */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #dbd8d7;
+    padding: 20px;
+    margin-top: 15px;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: none; /* disables hover dropdown on mobile */
+  }
+
+  .dropdown .dropdown-menu {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    padding-left: 10px;
+    display: none;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: block;
+  }
+}
+
+/* Just Added Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.just-added .item {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.just-added .item:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.just-added .item:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.just-added .item:nth-child(3) {
+  animation-delay: 0.6s;
+}
