@@ -12,6 +12,7 @@ body {
 
 /* Navbar */
 .navbar {
+  position: relative; /* Make navbar the reference container */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,96 +26,103 @@ body {
   height: 40px;
 }
 
+/* Navigation links */
 .nav-links {
   list-style: none;
   display: flex;
   gap: 30px;
 }
 
+/* Remove per-li relative positioning */
 .nav-links li {
-  position: relative;
+  /* Remove position: relative; so that dropdown-menu is not confined within the li.
+     We want the absolute positioning to reference the .navbar container. */
+  position: static;
+  display: flex;
+  align-items: center;
 }
 
-.nav-links a {
+/* Styling for normal nav links */
+.nav-links a,
+.dropdown-toggle {
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
   padding: 5px 10px;
-  color: black;
   transition: color 0.3s ease-in-out;
 }
 
+/* Normal links: black, turning gray on hover */
+.nav-links a {
+  color: black;
+}
+.nav-links a:hover {
+  color: gray;
+}
+
+/* "New" link: red by default, dark gray on hover */
 .dropdown-toggle {
   background: none;
   border: none;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 5px 10px;
-  color: black;
   cursor: pointer;
   font-family: inherit;
+  color: red;
 }
-
 .dropdown-toggle:hover {
   color: darkgray;
 }
 
-
-.nav-links a:hover {
-  color: darkgray;
-}
-
+/* Right icons */
 .nav-right {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
-
 .nav-right a {
   font-size: 18px;
   color: #333;
   transition: color 0.3s;
 }
-
 .nav-right a:hover {
   color: darkgray;
 }
 
-/* Dropdown Menu */
+/* Dropdown menu (unchanged) */
 .dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
+  position: absolute;      /* Absolutely position relative to .navbar */
+  top: 100%;               /* Immediately below the navbar */
   left: 0;
-  width: max-content;
+  /* Optionally, set a max-width and center it if desired:
+     max-width: 1200px;
+     margin: 0 auto; 
+  */
+  display: none;           /* Hidden by default */
   background-color: #f2f2f2;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  z-index: 1000;
   opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
+  transform: translateY(-10px); /* Starts 10px above its final position */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 999;            /* Ensure it appears on top */
 }
 
+/* Show the dropdown-menu with animation */
 .dropdown:hover .dropdown-menu {
-  display: block;
+  display: block;          /* Or use visibility if you prefer */
   opacity: 1;
-  visibility: visible;
   transform: translateY(0);
 }
 
+/* Menu container and columns */
 .menu-container {
   display: flex;
   gap: 30px;
 }
-
 .menu-column {
   display: flex;
   flex-direction: column;
   gap: 10px;
   min-width: 120px;
 }
-
 .menu-column a {
   text-decoration: none;
   font-size: 14px;
@@ -122,15 +130,12 @@ body {
   color: #000;
   transition: color 0.2s ease;
 }
-
 .menu-column a:hover {
   color: #666;
 }
-
 .link-red {
   color: red;
 }
-
 .btn-black {
   background-color: black;
   color: white;
@@ -138,12 +143,12 @@ body {
   border-radius: 4px;
   text-align: center;
 }
-
 .menu-image img {
   width: 150px;
   height: auto;
   object-fit: cover;
 }
+
 
 /* Carousel */
 .carousel {
@@ -290,7 +295,6 @@ body {
   cursor: pointer;
   color: #333;
 }
-
 @media (max-width: 768px) {
   .hamburger {
     display: block;
@@ -298,7 +302,6 @@ body {
     top: 15px;
     right: 20px;
   }
-
   .nav-links {
     display: none;
     flex-direction: column;
@@ -307,28 +310,24 @@ body {
     padding: 20px;
     margin-top: 15px;
   }
-
   .nav-links.show {
     display: flex;
   }
-
   .dropdown:hover .dropdown-menu {
-    display: none; /* disables hover dropdown on mobile */
+    display: none; /* Disable hover behavior on mobile */
   }
-
   .dropdown .dropdown-menu {
     position: relative;
     opacity: 1;
-    visibility: visible;
     transform: none;
     padding-left: 10px;
     display: none;
   }
-
   .dropdown.open .dropdown-menu {
     display: block;
   }
 }
+
 
 /* Just Added Animation */
 @keyframes fadeInUp {
@@ -336,7 +335,6 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);

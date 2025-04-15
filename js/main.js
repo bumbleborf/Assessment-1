@@ -1,16 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const dropdowns = document.querySelectorAll(".dropdown");
+  // Hamburger toggle for mobile navigation
+  const hamburger = document.querySelector(".hamburger");
+  const navLinks = document.getElementById("navLinks");
+  
+  hamburger.addEventListener("click", () => {
+    const expanded = hamburger.getAttribute("aria-expanded") === "true";
+    hamburger.setAttribute("aria-expanded", !expanded);
+    navLinks.classList.toggle("active");
+  });
 
+  // Dropdown functionality (desktop hover and mobile click)
+  const dropdowns = document.querySelectorAll(".dropdown");
   dropdowns.forEach(dropdown => {
     const menu = dropdown.querySelector(".dropdown-menu");
 
     // Hover for desktop
     dropdown.addEventListener("mouseenter", () => {
-      if (window.innerWidth > 768) menu.style.display = "block";
+      if (window.innerWidth > 768) {
+        menu.style.display = "block";
+      }
     });
 
     dropdown.addEventListener("mouseleave", () => {
-      if (window.innerWidth > 768) menu.style.display = "none";
+      if (window.innerWidth > 768) {
+        menu.style.display = "none";
+      }
     });
 
     // Click for mobile
@@ -28,77 +42,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Hamburger toggle
-  const hamburger = document.querySelector(".hamburger");
-  const navLinks = document.querySelector(".nav-links");
-
-  hamburger.addEventListener("click", () => {
-    navLinks.classList.toggle("show");
-  });
-
-  // Carousel logic with autoplay
+  // Carousel functionality
   const slides = document.querySelectorAll(".carousel-slides img");
   const indicators = document.querySelectorAll(".indicator");
   let currentSlide = 0;
-  let slideInterval;
+  let slideInterval = setInterval(nextSlide, 4000);
 
-  const showSlide = index => {
-    const slideWidth = slides[0].clientWidth;
-    document.querySelector(".carousel-slides").style.transform = `translateX(-${index * slideWidth}px)`;
-    indicators.forEach(btn => btn.classList.remove("active"));
-    indicators[index].classList.add("active");
+  function showSlide(index) {
+    // Assuming slides are full width, we translate by 100% increments
+    document.querySelector(".carousel-slides").style.transform = `translateX(-${index * 100}%)`;
+    indicators.forEach((btn, i) => {
+      btn.classList.toggle("active", i === index);
+    });
     currentSlide = index;
-  };
+  }
+
+  function nextSlide() {
+    showSlide((currentSlide + 1) % slides.length);
+  }
+
+  function prevSlide() {
+    showSlide((currentSlide - 1 + slides.length) % slides.length);
+  }
 
   document.querySelector(".next").addEventListener("click", () => {
-    const next = (currentSlide + 1) % slides.length;
-    showSlide(next);
+    clearInterval(slideInterval);
+    nextSlide();
   });
 
   document.querySelector(".prev").addEventListener("click", () => {
-    const prev = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(prev);
+    clearInterval(slideInterval);
+    prevSlide();
   });
 
-  indicators.forEach(indicator => {
+  indicators.forEach((indicator, index) => {
     indicator.addEventListener("click", () => {
-      const index = parseInt(indicator.dataset.slide);
+      clearInterval(slideInterval);
       showSlide(index);
     });
   });
 
-  const startAutoplay = () => {
-    slideInterval = setInterval(() => {
-      const next = (currentSlide + 1) % slides.length;
-      showSlide(next);
-    }, 4000);
-  };
-
-  const stopAutoplay = () => {
-    clearInterval(slideInterval);
-  };
-
-  document.querySelector(".carousel").addEventListener("mouseenter", stopAutoplay);
-  document.querySelector(".carousel").addEventListener("mouseleave", startAutoplay);
-
-  showSlide(0);
-  startAutoplay();
-});
-
-// Back to Top Button Logic
-const backToTopBtn = document.getElementById('backToTopBtn');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    backToTopBtn.style.display = 'block';
-  } else {
-    backToTopBtn.style.display = 'none';
-  }
-});
-
-backToTopBtn.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
+  // Back to Top button functionality
+  const backToTopBtn = document.getElementById("backToTopBtn");
+  window.addEventListener("scroll", () => {
+    backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
   });
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  // Initialize the carousel with the first slide
+  showSlide(0);
 });
