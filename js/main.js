@@ -1,100 +1,68 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Hamburger toggle for mobile navigation
   const hamburger = document.querySelector(".hamburger");
-  const navLinks = document.getElementById("navLinks");
-  
+  const navLinks = document.querySelector(".nav-links");
   hamburger.addEventListener("click", () => {
-    const expanded = hamburger.getAttribute("aria-expanded") === "true";
-    hamburger.setAttribute("aria-expanded", !expanded);
-    navLinks.classList.toggle("active");
+    navLinks.classList.toggle("show");
   });
-
-  // Dropdown functionality (desktop hover and mobile click)
   const dropdowns = document.querySelectorAll(".dropdown");
   dropdowns.forEach(dropdown => {
     const menu = dropdown.querySelector(".dropdown-menu");
-
-    // Hover for desktop
-    dropdown.addEventListener("mouseenter", () => {
-      if (window.innerWidth > 768) {
-        menu.style.display = "block";
-      }
-    });
-
-    dropdown.addEventListener("mouseleave", () => {
-      if (window.innerWidth > 768) {
-        menu.style.display = "none";
-      }
-    });
-
-    // Click for mobile
     dropdown.addEventListener("click", e => {
       if (window.innerWidth <= 768) {
         e.stopPropagation();
         dropdown.classList.toggle("open");
       }
     });
-
     document.addEventListener("click", () => {
       if (window.innerWidth <= 768) {
         dropdown.classList.remove("open");
       }
     });
   });
-
-  // Carousel functionality
   const slides = document.querySelectorAll(".carousel-slides img");
   const indicators = document.querySelectorAll(".indicator");
-  let currentSlide = 0;
-  let slideInterval = setInterval(nextSlide, 4000);
-
+  let currentIndex = 0;
   function showSlide(index) {
-    // Assuming slides are full width, we translate by 100% increments
-    document.querySelector(".carousel-slides").style.transform = `translateX(-${index * 100}%)`;
+    const totalSlides = slides.length;
+    currentIndex = (index + totalSlides) % totalSlides;
+    document.querySelector(".carousel-slides").style.transform = `translateX(-${currentIndex * 100}%)`;
     indicators.forEach((btn, i) => {
-      btn.classList.toggle("active", i === index);
+      btn.classList.toggle("active", i === currentIndex);
     });
-    currentSlide = index;
   }
-
-  function nextSlide() {
-    showSlide((currentSlide + 1) % slides.length);
-  }
-
-  function prevSlide() {
-    showSlide((currentSlide - 1 + slides.length) % slides.length);
-  }
-
-  document.querySelector(".next").addEventListener("click", () => {
-    clearInterval(slideInterval);
-    nextSlide();
-  });
-
   document.querySelector(".prev").addEventListener("click", () => {
-    clearInterval(slideInterval);
-    prevSlide();
+    showSlide(currentIndex - 1);
   });
-
+  document.querySelector(".next").addEventListener("click", () => {
+    showSlide(currentIndex + 1);
+  });
   indicators.forEach((indicator, index) => {
     indicator.addEventListener("click", () => {
-      clearInterval(slideInterval);
       showSlide(index);
     });
   });
-
-  // Back to Top button functionality
+  let slideInterval = setInterval(() => {
+    showSlide(currentIndex + 1);
+  }, 4000);
+  const carousel = document.querySelector(".carousel");
+  carousel.addEventListener("mouseenter", () => {
+    clearInterval(slideInterval);
+  });
+  carousel.addEventListener("mouseleave", () => {
+    slideInterval = setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 4000);
+  });
   const backToTopBtn = document.getElementById("backToTopBtn");
   window.addEventListener("scroll", () => {
-    backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+    if (document.documentElement.scrollTop > 100) {
+      backToTopBtn.classList.add("show");
+    } else {
+      backToTopBtn.classList.remove("show");
+    }
   });
-
   backToTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
-
-  // Initialize the carousel with the first slide
   showSlide(0);
 });
