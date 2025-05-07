@@ -1,13 +1,18 @@
+/* Reset basic box model and spacing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Base font and color */
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #fff;
   color: #333;
 }
+
+/* Navbar container styling */
 .navbar {
   position: relative;
   display: flex;
@@ -16,21 +21,28 @@ body {
   padding: 15px 40px;
   background-color: #dbd8d7;
   border-bottom: 1px solid #ddd;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* allow items to wrap on smaller screens */
 }
+
+/* Logo image */
 .logo img {
   height: 40px;
 }
+
+/* Navigation link layout */
 .nav-links {
   list-style: none;
   display: flex;
   gap: 30px;
 }
+
+/* Each nav item */
 .nav-links li {
-  position: static;
   display: flex;
   align-items: center;
 }
+
+/* Links and dropdown toggle styles */
 .nav-links a,
 .dropdown-toggle {
   text-decoration: none;
@@ -39,12 +51,18 @@ body {
   padding: 5px 10px;
   transition: color 0.3s ease-in-out;
 }
+
+/* Default link color */
 .nav-links a {
   color: black;
 }
+
+/* Hover effect */
 .nav-links a:hover {
   color: gray;
 }
+
+/* Button for dropdown toggle (e.g. "New") */
 .dropdown-toggle {
   background: none;
   border: none;
@@ -54,25 +72,32 @@ body {
   font-size: 14px;
   padding: 4px 8px;
 }
+
 .dropdown-toggle:hover {
   color: darkgray;
 }
+
+/* Right-side icons (search, user, cart) */
 .nav-right {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .nav-right a {
   font-size: 18px;
   color: #333;
   transition: color 0.3s;
 }
+
 .nav-right a:hover {
   color: darkgray;
 }
+
+/* Dropdown panel layout */
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% - 1px); /* overlap by 1px to prevent hover gap */
   left: 0;
   width: 100vw;
   background-color: #f2f2f2;
@@ -84,81 +109,151 @@ body {
   z-index: 999;
   pointer-events: none;
 }
+
+/* Show dropdown on hover */
 .dropdown:hover .dropdown-menu {
-  display: block;
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
   pointer-events: auto;
 }
+
+/* Grid layout for dropdown columns */
 .menu-container {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
   gap: 20px;
 }
+
+/* Each column */
 .menu-column {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  text-align: center;
 }
+
+/* Standard columns get spacing */
+.menu-column:not(.menu-image) {
+  padding: 40px 0;
+  align-self: stretch;
+}
+
+/* Second column has a border */
+.menu-column:not(.menu-image):nth-child(2) {
+  border-left: 4px solid #ccc;
+  padding-left: 20px;
+}
+
+/* First column padding */
+.menu-column:not(.menu-image):first-child {
+  padding-right: 20px;
+}
+
+/* Menu links inside dropdown */
 .menu-column a {
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
   color: #000;
-  transition: color 0.2s ease;
   padding: 4px 0;
+  transition: color 0.2s ease;
+  display: inline-block;
 }
+
 .menu-column a:hover {
   color: #666;
 }
+
+/* Image column */
 .menu-column.menu-image {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .menu-column.menu-image img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
 }
-.btn-black {
-  display: inline-block;
-  background-color: black;
-  color: white;
-  padding: 8px 16px;
+
+/* Launch Calendar button */
+.menu-column a.btn-black {
+  padding: 8px 24px;
   font-size: 14px;
   font-weight: 600;
-  line-height: 1.2;
+  background-color: #000;
+  color: #fff;
+  border: none;
   border-radius: 999px;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: 16px;
+  transition: background-color 0.3s ease;
 }
-.btn-black:hover {
-  background-color: #444;
-  color: white;
+
+.menu-column a.btn-black:hover {
+  background-color: #333;
 }
-.link-red {
+
+/* Red colored links */
+.link-red,
+.menu-column a.link-red {
   color: red;
   font-weight: 700;
 }
-.link-red:hover {
+
+.link-red:hover,
+.menu-column a.link-red:hover {
   color: #c00;
 }
+
+/* Carousel wrapper */
 .carousel {
   position: relative;
   width: 100%;
   overflow: hidden;
 }
+
+/* Slides in a row */
 .carousel-slides {
   display: flex;
   transition: transform 0.5s ease-in-out;
 }
-.carousel-slides img {
-  width: 100%;
-  flex-shrink: 0;
+
+/* Each individual slide */
+.carousel-slides .slide {
+  position: relative;
+  min-width: 100%;
 }
+
+/* Slide images */
+.carousel-slides .slide img {
+  width: 100%;
+  display: block;
+}
+
+/* Button overlay on slides */
+.carousel-slides .slide-btn {
+  position: absolute;
+  bottom: 30%;
+  left: 41%;
+  transform: translateX(-50%);
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-slides .slide-btn:hover {
+  background-color: #333;
+}
+
+/* Previous/Next arrows */
 .prev,
 .next {
   position: absolute;
@@ -168,22 +263,28 @@ body {
   border: none;
   cursor: pointer;
 }
+
 .prev {
   left: 10px;
 }
+
 .next {
   right: 10px;
 }
+
 .prev img,
 .next img {
   width: 40px;
   opacity: 0.7;
   transition: opacity 0.3s;
 }
+
 .prev img:hover,
 .next img:hover {
   opacity: 1;
 }
+
+/* Dots at bottom of carousel */
 .carousel-indicators {
   position: absolute;
   bottom: 15px;
@@ -192,6 +293,8 @@ body {
   display: flex;
   gap: 8px;
 }
+
+/* Each dot */
 .indicator {
   width: 10px;
   height: 10px;
@@ -201,25 +304,35 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+/* Active dot color */
 .indicator.active {
   background-color: black;
 }
+
+/* Just Added section */
 .just-added {
   padding: 40px 60px;
   background-color: #fff;
 }
+
+/* Section heading */
 .section-title {
   font-size: 24px;
   font-weight: 700;
   text-align: center;
   margin-bottom: 30px;
 }
+
+/* Flexbox layout for new items */
 .just-added-container {
   display: flex;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
 }
+
+/* Individual product */
 .item {
   position: relative;
   text-align: center;
@@ -228,80 +341,159 @@ body {
   max-width: 300px;
   margin: 0 auto;
 }
+
+/* Product image */
 .item img {
   width: 100%;
   display: block;
   transition: opacity 0.3s ease;
 }
+
+/* Hover image (initially hidden) */
 .item .hover {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
 }
+
+/* Fade in hover image */
 .item:hover .hover {
   opacity: 1;
 }
+
+/* Fade out default image */
 .item:hover .default {
   opacity: 0;
 }
+
+/* Product tags on top-right (e.g. "New") */
+.item-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
+/* Product title text */
 .item-title {
   margin-top: 10px;
   font-size: 16px;
   font-weight: 600;
   color: #333;
 }
+
+/* Back to top button (fixed position) */
+#backToTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+/* Show back-to-top button */
+#backToTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#backToTopBtn:hover {
+  background-color: #555;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #dbd8d7;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.footer-links {
+  display: inline-flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #666;
+}
+
+.footer-copy {
+  margin: 0;
+  font-size: 12px;
+  color: #777;
+}
+
+/* Hamburger hidden by default (shown on mobile) */
+.hamburger {
+  display: none;
+}
+
+/* Responsive layout for screens ≤768px */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
   }
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .menu-container {
-    flex-direction: column;
-  }
-  .just-added {
-    padding: 40px 20px;
-  }
-  .just-added-container {
-    justify-content: center;
-  }
-  .nav-right {
-    margin-top: 10px;
-  }
-}
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #333;
-}
-@media (max-width: 768px) {
+
   .hamburger {
     display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
     position: absolute;
     top: 15px;
     right: 20px;
   }
+
   .nav-links {
     display: none;
     flex-direction: column;
+    gap: 10px;
     width: 100%;
     background-color: #dbd8d7;
     padding: 20px;
     margin-top: 15px;
   }
+
   .nav-links.show {
     display: flex;
   }
+
+  /* Disable dropdown hover on mobile */
   .dropdown:hover .dropdown-menu {
     display: none;
   }
+
   .dropdown .dropdown-menu {
     position: relative;
     opacity: 1;
@@ -309,81 +501,13 @@ body {
     padding-left: 10px;
     display: none;
   }
+
   .dropdown.open .dropdown-menu {
     display: block;
   }
 }
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+
+/* Items fade in via JavaScript (GSAP) */
 .just-added .item {
-  animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
-}
-.just-added .item:nth-child(1) {
-  animation-delay: 0.2s;
-}
-.just-added .item:nth-child(2) {
-  animation-delay: 0.4s;
-}
-.just-added .item:nth-child(3) {
-  animation-delay: 0.6s;
-}
-#backToTopBtn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  padding: 12px 14px;
-  cursor: pointer;
-  font-size: 18px;
-  z-index: 1000;
-  display: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-#backToTopBtn:hover {
-  background-color: #555;
-  transform: scale(1.1);
-}
-#backToTopBtn.show {
-  opacity: 1;
-  visibility: visible;
-}
-.footer {
-  background-color: #dbd8d7;
-  padding: 30px 20px;
-  text-align: center;
-  font-size: 14px;
-  color: #333;
-}
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 10px;
-}
-.footer-links a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-.footer-links a:hover {
-  color: darkgray;
-}
-.footer-copy {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #777;
 }

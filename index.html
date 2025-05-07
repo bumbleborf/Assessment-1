@@ -4,27 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>New Balance</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="/css/main.css"/>
+
+  <!-- GSAP animation library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/Draggable.min.js"></script>
+
+  <!-- Main JavaScript (deferred) -->
   <script defer src="/js/main.js"></script>
 </head>
 <body>
+
+  <!-- HEADER / NAVBAR -->
   <header>
     <nav class="navbar">
-      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <!-- Mobile hamburger (hidden on desktop) -->
+      <button class="hamburger" aria-label="Toggle menu">
         <i class="fas fa-bars"></i>
       </button>
+
+      <!-- Logo -->
       <div class="nav-left">
-        <a href="#" class="logo" aria-label="Go to homepage">
+        <a href="#" class="logo" aria-label="Homepage">
           <img src="images/nblogo.png" alt="New Balance Logo"/>
         </a>
       </div>
+
+      <!-- Nav links with dropdowns -->
       <ul class="nav-links" id="navLinks">
+        <!-- Example dropdown: 'New' -->
         <li class="dropdown">
           <button class="dropdown-toggle">New</button>
+          <!-- struggling with hover gap: still flickers if you move too fast -->
           <div class="dropdown-menu" role="menu">
             <div class="menu-container">
               <div class="menu-column">
@@ -44,6 +67,7 @@
             </div>
           </div>
         </li>
+        <!-- Repeat for Men, Women, Kids -->
         <li class="dropdown">
           <a href="#">Men</a>
           <div class="dropdown-menu" role="menu">
@@ -108,56 +132,78 @@
           </div>
         </li>
       </ul>
+
+      <!-- Right-side icons -->
       <div class="nav-right">
         <a href="#search" aria-label="Search"><i class="fas fa-search"></i></a>
         <a href="#user" aria-label="User"><i class="fas fa-user"></i></a>
-        <a href="#cart" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i></a>
+        <a href="#cart" aria-label="Cart"><i class="fas fa-shopping-cart"></i></a>
       </div>
     </nav>
   </header>
+
+  <!-- CAROUSEL SECTION -->
   <section class="carousel">
     <div class="carousel-slides">
-      <img src="images/carousel530.jpg" alt="Slide 1"/>
-      <img src="images/carousel550.jpg" alt="Slide 2"/>
-      <img src="images/carousel9060.jpg" alt="Slide 3"/>
+      <!-- Each slide wraps image + button -->
+      <div class="slide">
+        <img src="images/carousel530.jpg" alt="Slide 1"/>
+        <a href="/product/530" class="slide-btn">Shop 530</a>
+      </div>
+      <div class="slide">
+        <img src="images/carousel550.jpg" alt="Slide 2"/>
+        <a href="/product/550" class="slide-btn">Shop 550</a>
+      </div>
+      <div class="slide">
+        <img src="images/carousel9060.jpg" alt="Slide 3"/>
+        <a href="/product/9060" class="slide-btn">Shop 9060</a>
+      </div>
     </div>
-    <button class="prev" aria-label="Previous Slide">
-      <img src="images/arrow-left.png" alt="Previous"/>
-    </button>
-    <button class="next" aria-label="Next Slide">
-      <img src="images/arrow-right.png" alt="Next"/>
-    </button>
+    <!-- Prev/Next arrows -->
+    <button class="prev" aria-label="Previous Slide"><img src="images/arrow-left.png" alt="Prev"/></button>
+    <button class="next" aria-label="Next Slide"><img src="images/arrow-right.png" alt="Next"/></button>
     <br/>
     <br/>
+    
+    <!-- Indicators -->
     <div class="carousel-indicators">
-      <button class="indicator active" data-slide="0" aria-label="Slide 1"></button>
-      <button class="indicator" data-slide="1" aria-label="Slide 2"></button>
-      <button class="indicator" data-slide="2" aria-label="Slide 3"></button>
+      <button class="indicator active" data-slide="0"></button>
+      <button class="indicator"       data-slide="1"></button>
+      <button class="indicator"       data-slide="2"></button>
     </div>
   </section>
+
+  <!-- JUST ADDED SECTION -->
   <section class="just-added">
     <h2 class="section-title">Just Added</h2>
     <div class="just-added-container">
       <div class="item">
         <img src="images/plumCrew1.webp" class="default" alt="Plum Crew"/>
-        <img src="images/crewcolour.webp" class="hover" alt="Plum Crew Hover"/>
+        <img src="images/crewcolour.webp" class="hover"   alt="Plum Crew Hover"/>
+        <span class="item-tag">New</span>  <!-- Tag -->
         <p class="item-title">Made in USA Crewneck Sweatshirt</p>
       </div>
       <div class="item">
         <img src="images/1906crimsonSea1.webp" class="default" alt="1906 Crimson"/>
-        <img src="images/1906crimsonSea2.webp" class="hover" alt="1906 Crimson Hover"/>
+        <img src="images/1906crimsonSea2.webp" class="hover"   alt="1906 Crimson Hover"/>
+        <span class="item-tag">New Colour</span>
         <p class="item-title">1906A</p>
       </div>
       <div class="item">
         <img src="images/9060mbWhite1.webp" class="default" alt="9060 White"/>
-        <img src="images/9060mbWhite2.webp" class="hover" alt="9060 White Hover"/>
+        <img src="images/9060mbWhite2.webp" class="hover"   alt="9060 White Hover"/>
+        <span class="item-tag">Back In Stock</span>
         <p class="item-title">9060</p>
       </div>
     </div>
   </section>
+
+  <!-- BACK TO TOP BUTTON -->
   <button id="backToTopBtn" aria-label="Back to top">
-    <i class="fas fa-chevron-up"></i>
+    <i class="fas fa-angle-up"></i>
   </button>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-links">
       <a href="#">Privacy Policy</a>
